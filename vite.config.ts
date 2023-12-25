@@ -15,7 +15,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, "src/components/Carousel.tsx"),
-            formats: ['es'],
+            formats: ['es', 'cjs'],
         },
         rollupOptions: {
             output: {
