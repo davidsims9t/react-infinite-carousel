@@ -17,7 +17,8 @@
     "test": "vitest",
     "build": "rm -rf ./dist && vite build",
     "preview": "vite preview",
-    "dev": "vite"
+    "dev": "vite",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "react": "^18.2.0"
