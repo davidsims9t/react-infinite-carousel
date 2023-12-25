@@ -1,6 +1,6 @@
 {
   "name": "react-canvas-carousel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A carousel that repeats infinitely using HTML Canvas.",
   "main": "./dist/react-canvas-carousel.js",
   "author": "David Sims",
