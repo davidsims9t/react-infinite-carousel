@@ -8,12 +8,13 @@
   "style": "./dist/index.css",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": ["src", "dist"],
   "exports": {
     ".": {
       "module": "./dist/index.mjs",
       "default": "./dist/index.js"
     },
-    "./carousel.css": "./dist/carousel.css"
+    "./carousel.css": "./dist/index.css"
   },
   "scripts": {
     "test": "vitest",
