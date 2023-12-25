@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "An carousel that repeats infinitely using HTML Canvas.",
   "main": "./src/index.ts",
-  "scripts": {
-    "test": "vitest"
-  },
   "author": "David Sims",
   "license": "ISC",
+  "scripts": {
+    "test": "vitest",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite"
+  },
   "dependencies": {
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.1.2",
+    "@vitejs/plugin-react": "^4.2.1",
     "vite": "^5.0.10",
     "vitest": "^1.1.0"
   }

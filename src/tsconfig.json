@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "lib": ["ESNext", "DOM"],
         "types": ["vite/client"],
         "esModuleInterop": true,
         "skipLibCheck": true,
