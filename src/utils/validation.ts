@@ -1,15 +1,12 @@
-import { ReactElement, ReactNode, isValidElement } from "react";
-import { CarouselProps } from "../components/Carousel";
+import { ReactElement } from "react";
 
-export const checkCarouselProps = ({ imgWidth, imgHeight, direction, children }: CarouselProps) => {
-    if (!imgWidth) {
-        return new Error( "Invalid image width.");
-    }
-
-    if (!imgHeight) {
-        return new Error("Invalid image height.");
-    }
-
+/**
+ * Checks to see if props passed into checkCarouselProps are valid.
+ * 
+ * @param param0 direction and children
+ * @returns boolean
+ */
+export const checkCarouselProps = ({ direction, children }: CarouselProps) => {
     if (![-1, 1].includes(direction)) {
         return new Error("Invalid direction. Direction must be either -1 (left) or 1 (right).");
     }

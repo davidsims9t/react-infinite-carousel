@@ -25,15 +25,59 @@ export const loadImage = async (img: string): Promise<LoadImageResponse> => {
 };
 
 /**
- * Scales images from their original size to the specific width and height.
+ * Gets the average image height from an array of images.
  * 
- * @param width the width of the image
- * @param height the height of the image
- * @param maxWidth the max width of the image
- * @param maxHeight the max height of the image
- * @returns the scaled width and height of the image
+ * @param images Array of images
+ * @returns number
  */
-export const scale = (width: number, height: number, maxWidth: number, maxHeight: number) => {
-    const ratio = Math.min(maxWidth / width, maxHeight / height);
-    return { width: width * ratio, height: height * ratio };
+export const getAvgImageHeight = (images: HTMLImageElement[]) => {
+    return images.reduce((sum, image) => {
+        return sum + image.naturalHeight;
+    }, 0) / images.length;
+};
+
+/**
+ * Gets the average image width from an array of images.
+ * 
+ * @param images Array of images
+ * @returns number
+ */
+export const getAvgImageWidth = (images: HTMLImageElement[]) => {
+    return images.reduce((sum, image) => {
+        return sum + image.naturalWidth;
+    }, 0) / images.length;
+};
+
+/**
+ * Returns a boolean if the images span the viewport width or not.
+ * 
+ * @param images array of images.
+ * @param margin space between images
+ * @returns number
+ */
+export const imagesSpanViewport = (images: HTMLImageElement[], margin: number = 20) => {
+    return getTotalWidthFromImages(images, margin) >= window.innerWidth;
+};
+
+/**
+ * Returns the total width of the all of the images with margin accounted for.
+ * 
+ * @param images array of images.
+ * @param margin space between images
+ * @returns number
+ */
+export const getTotalWidthFromImages = (images: HTMLImageElement[], margin: number = 20) => {
+    return images.reduce((sum, image) => {
+        return sum + image.naturalWidth + margin;
+    }, 0);
+};
+
+/**
+ * Gets the average image width given the width of the viewport.
+ * 
+ * @param images Array of images
+ * @returns number
+ */
+export const getAvgImageWidthWindow = (images: HTMLImageElement[], margin: number = 20) => {
+    return Math.ceil(window.innerWidth / images.length);
 };

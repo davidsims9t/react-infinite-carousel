@@ -2,9 +2,17 @@ import { useRef, useEffect, ReactElement } from "react";
 import Error from "./Error";
 import { initCarousel } from "../utils/canvas";
 import { checkCarouselProps } from "../utils/validation";
+import "./carousel.css";
 
-const Carousel = ({ imgWidth, imgHeight, children, speed = 1, direction = -1, margin = 20 }: CarouselProps) => {
-    const error = checkCarouselProps({ imgWidth, imgHeight, children, direction });
+export type CarouselProps = {
+    children: ReactElement<{ src: string; }>[];
+    margin?: number;
+    speed?: number;
+    direction?: -1 | 1;
+};
+
+const Carousel = ({ children, speed = 5, direction = -1, margin = 20 }: CarouselProps) => {
+    const error = checkCarouselProps({ children, direction });
     if (error) {
         return <Error message={error.message} />;
     }
@@ -15,7 +23,7 @@ const Carousel = ({ imgWidth, imgHeight, children, speed = 1, direction = -1, ma
     useEffect(() => {
         if (!ref) return;
 
-        initCarousel({ ref, frame, children, imgWidth, imgHeight, direction, speed, margin });
+        initCarousel({ ref, frame, children, direction, speed, margin });
 
         return () => {
             window.cancelAnimationFrame(frame.current);

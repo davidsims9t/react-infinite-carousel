@@ -12,10 +12,12 @@ export const App = () => {
                     It requires that you have enough images that fill the viewport width to work properly.
                 </p>
             </div>
-            <Carousel imgWidth={600} imgHeight={400} speed={5}>
+            <Carousel>
+                <Slide src="https://placehold.co/300x200" />
                 <Slide src="https://placehold.co/600x400" />
+                <Slide src="https://placehold.co/300x200" />
                 <Slide src="https://placehold.co/600x400" />
-                <Slide src="https://placehold.co/600x400" />
+                <Slide src="https://placehold.co/300x200" />
             </Carousel>
         </>
     );
