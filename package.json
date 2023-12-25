@@ -1,6 +1,6 @@
 {
   "name": "react-canvas-carousel",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A carousel that repeats infinitely using HTML Canvas.",
   "main": "./dist/react-canvas-carousel.js",
   "author": "David Sims",
@@ -18,7 +18,7 @@
     "build": "rm -rf ./dist && vite build",
     "preview": "vite preview",
     "dev": "vite",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "react": "^18.2.0"
