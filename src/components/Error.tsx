@@ -4,7 +4,7 @@ export type ErrorProps = {
 
 export const Error = ({ message }: ErrorProps) => {
     return (
-        <div className="error">
+        <div data-testid="error" className="error">
             { message }
         </div>
     );

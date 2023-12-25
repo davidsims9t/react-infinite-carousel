@@ -1,5 +1,6 @@
 import { MutableRefObject } from "react";
-import { LoadImageResponse, getAvgImageHeight, getAvgImageWidth, getAvgImageWidthWindow, imagesSpanViewport, loadImage } from "./image";
+import { getAvgImageHeight, getAvgImageWidth, getAvgImageWidthWindow, imagesSpanViewport, loadImage } from "./image";
+import type { LoadImageResponse } from "./image";
 import { CarouselProps } from "../components/Carousel";
 
 const canvasDelta = { 0: 0, 1: 0 };
@@ -29,7 +30,7 @@ type AnimateProps = Omit<LoadCanvasProps, "children" | "imgWidth"> & Omit<Return
  * @param param0 Draw canvas props.
  * @returns The canvas loaded as an image element.
  */
-const drawCanvas = async ({
+export const drawCanvas = async ({
     canvasWidth,
     imgHeight,
     images,
@@ -61,7 +62,7 @@ const drawCanvas = async ({
  * @param param0 Draw canvases props.
  * @returns The two identical canvases and the wrapper canvas.
  */
-const drawCanvases = async ({ images, margin, imgWidth, imgHeight, canvasWidth }: DrawCanvasesProps) => {
+export const drawCanvases = async ({ images, margin, imgWidth, imgHeight, canvasWidth }: DrawCanvasesProps) => {
     try {
         const [canvas1, canvas2] = await Promise.all([
             drawCanvas({ canvasWidth, imgHeight, imgWidth, images, margin }),
@@ -81,7 +82,7 @@ const drawCanvases = async ({ images, margin, imgWidth, imgHeight, canvasWidth }
  * @param param0 dimension props
  * @returns canvas width, wrapper width, and velocity.
  */
-const getDimensions = ({ images, margin, speed, direction }: DimensionProps) => {
+export const getDimensions = ({ images, margin, speed, direction }: DimensionProps) => {
     const numImages = images.length;
     const imgWidth = imagesSpanViewport(images, margin) ? getAvgImageWidth(images) : getAvgImageWidthWindow(images, margin);
     const imgHeight = getAvgImageHeight(images);
@@ -103,7 +104,7 @@ const getDimensions = ({ images, margin, speed, direction }: DimensionProps) => 
  * 
  * @param param0 animate props.
  */
-const animate = ({ ref, frame, velocity, wrapperCtx, canvasWrapperWidth, canvasWidth, imgHeight, canvas1, canvas2, direction }: AnimateProps) => {
+export const animate = ({ ref, frame, velocity, wrapperCtx, canvasWrapperWidth, canvasWidth, imgHeight, canvas1, canvas2, direction }: AnimateProps) => {
     wrapperCtx.clearRect(0, 0, canvasWrapperWidth, imgHeight);
 
     // The starting position of the second canvas e.g. if the canvas is going left-to-right the canvas should start at 960px otherwise -960px

@@ -12,7 +12,7 @@ export type CarouselProps = {
 };
 
 const Carousel = ({ children, speed = 5, direction = -1, margin = 20 }: CarouselProps) => {
-    const error = checkCarouselProps({ children, direction });
+    const error = checkCarouselProps({ children, direction, speed, margin });
     if (error) {
         return <Error message={error.message} />;
     }
@@ -32,7 +32,7 @@ const Carousel = ({ children, speed = 5, direction = -1, margin = 20 }: Carousel
 
     return (
         <div className="carousel-wrapper">
-            <div className="carousel">
+            <div data-testid="carousel" className="carousel">
                 <canvas ref={ref} />
                 {children}
             </div>

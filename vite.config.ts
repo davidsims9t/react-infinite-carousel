@@ -4,6 +4,10 @@ import { resolve } from "path";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+    },
     plugins: [
         react(),
         dts({
