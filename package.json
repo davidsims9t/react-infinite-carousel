@@ -1,21 +1,21 @@
 {
   "name": "react-canvas-carousel",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A carousel that repeats infinitely using HTML Canvas.",
   "main": "./dist/react-canvas-carousel.js",
   "author": "David Sims",
   "license": "ISC",
-  "style": "./dist/style.css",
-  "module": "./dist/react-canvas-carousel.mjs",
+  "style": "./dist/index.css",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "module": "./dist/react-canvas-carousel.mjs",
-      "default": "./dist/react-canvas-carousel.js"
+      "module": "./dist/index.mjs",
+      "default": "./dist/index.js"
     }
   },
   "scripts": {
     "test": "vitest",
-    "build": "rm -rf ./dist && vite build",
+    "build": "rm -rf ./dist && tsup ./src/index.ts",
     "preview": "vite preview",
     "dev": "vite",
     "prepare": "npm run build"
@@ -27,6 +27,7 @@
     "@testing-library/react": "^14.1.2",
     "@types/node": "^20.10.5",
     "@vitejs/plugin-react": "^4.2.1",
+    "tsup": "^8.0.1",
     "vite": "^5.0.10",
     "vite-plugin-dts": "^3.6.4",
     "vitest": "^1.1.0"
