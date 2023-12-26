@@ -20,7 +20,7 @@
     "./carousel.css": "./dist/index.css"
   },
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "build": "rm -rf ./dist && tsup ./src/index.ts",
     "preview": "vite preview",
     "dev": "vite",
