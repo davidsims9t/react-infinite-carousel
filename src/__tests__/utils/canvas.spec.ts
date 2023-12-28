@@ -1,5 +1,7 @@
 import { expect, test, vi } from "vitest";
-import { drawCanvas, drawCanvases, getDimensions } from "../../utils/canvas";
+import { animate, drawCanvas, drawCanvases, getDimensions, initCarousel } from "../../utils/canvas";
+import { MutableRefObject, ReactElement } from "react";
+import React from "react";
 
 const loadImage = vi.fn();
 
@@ -111,4 +113,89 @@ test("should calculate dimensions correctly", async () => {
         canvasWrapperWidth: 2128,
         velocity: -5
     });
+});
+
+test("should animate correctly", async () => {
+    const velocity = 1;
+    const clearRect = vi.fn();
+    const drawImage = vi.fn();
+    const frame = {
+        current: null
+    };
+
+    globalThis.requestAnimationFrame = vi.fn();
+
+    const wrapperCtx = {
+        clearRect,
+        drawImage
+    } as unknown as CanvasRenderingContext2D;
+
+    const canvas1 = new Image('test');
+    const canvas2 = new Image('test2');
+
+    animate({
+        frame,
+        velocity,
+        wrapperCtx,
+        direction: -1,
+        canvasWrapperWidth: 1024,
+        canvasWidth: 512,
+        imgHeight: 200,
+        canvas1,
+        canvas2
+    });
+
+    expect(globalThis.requestAnimationFrame).toHaveBeenCalled();
+    expect(clearRect).toHaveBeenCalledWith(0, 0, 1024, 200);
+    expect(drawImage).toHaveBeenCalledWith(canvas1, 0, 0);
+    expect(drawImage).toHaveBeenCalledWith(canvas2, 512, 0);
+});
+
+test.skip("initCarousel load images and animate canvas", async () => {
+    const clearRect = vi.fn();
+    const drawImage = vi.fn();
+    let width;
+    let height;
+    let context;
+    const getContext = (c) => {
+        console.log("context ", c);
+        context = c;
+        return {
+            canvas: {
+                width,
+                height
+            }
+        };
+    };
+
+    const frame = {
+        current: null
+    };
+    const ref = {
+        current: {
+            getContext
+        }
+    } as unknown as MutableRefObject<HTMLCanvasElement>;
+
+    globalThis.requestAnimationFrame = vi.fn();
+
+    const children = [
+        React.createElement('div', { src: 'test.jpg' }),
+        React.createElement('div', { src: 'test2.jpg' })
+    ] as unknown as ReactElement[];
+
+    initCarousel({
+        ref,
+        frame,
+        margin: 20,
+        speed: 5,
+        direction: -1,
+        children
+    });
+
+    expect(context).toEqual("2d");
+    // expect(globalThis.requestAnimationFrame).toHaveBeenCalled();
+    // expect(clearRect).toHaveBeenCalledWith(0, 0, 1024, 200);
+    // expect(drawImage).toHaveBeenCalledWith(canvas1, 0, 0);
+    // expect(drawImage).toHaveBeenCalledWith(canvas2, 512, 0);
 });

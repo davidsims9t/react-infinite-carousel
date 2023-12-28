@@ -18,7 +18,7 @@ type DimensionProps = Omit<CarouselProps, "children"> & {
     images: HTMLImageElement[];
 };
 
-type AnimateProps = Omit<LoadCanvasProps, "children" | "imgWidth"> & Omit<ReturnType<typeof getDimensions>, "imgWidth"> & {
+type AnimateProps = Omit<LoadCanvasProps, "children" | "imgWidth" | "ref"> & Omit<ReturnType<typeof getDimensions>, "imgWidth"> & {
     wrapperCtx: CanvasRenderingContext2D;
     canvas1: HTMLImageElement;
     canvas2: HTMLImageElement;
@@ -104,7 +104,7 @@ export const getDimensions = ({ images, margin, speed, direction }: DimensionPro
  * 
  * @param param0 animate props.
  */
-export const animate = ({ ref, frame, velocity, wrapperCtx, canvasWrapperWidth, canvasWidth, imgHeight, canvas1, canvas2, direction }: AnimateProps) => {
+export const animate = ({ frame, velocity, wrapperCtx, canvasWrapperWidth, canvasWidth, imgHeight, canvas1, canvas2, direction }: AnimateProps) => {
     wrapperCtx.clearRect(0, 0, canvasWrapperWidth, imgHeight);
 
     // The starting position of the second canvas e.g. if the canvas is going left-to-right the canvas should start at 960px otherwise -960px
@@ -122,7 +122,7 @@ export const animate = ({ ref, frame, velocity, wrapperCtx, canvasWrapperWidth, 
     wrapperCtx.drawImage(canvas2, dx2, 0);
 
     frame.current = window.requestAnimationFrame(() => {
-        animate({ ref, frame, velocity, wrapperCtx, canvasWrapperWidth, imgHeight, canvas1, canvas2, canvasWidth, direction });
+        animate({ frame, velocity, wrapperCtx, canvasWrapperWidth, imgHeight, canvas1, canvas2, canvasWidth, direction });
     });
 };
 
@@ -155,7 +155,6 @@ export const initCarousel = async ({ ref, frame, margin, speed, direction, child
         const { canvas1, canvas2 } = await drawCanvases({ images, imgWidth, imgHeight, canvasWidth, margin });
 
         animate({
-            ref,
             frame,
             wrapperCtx,
             canvas1,
